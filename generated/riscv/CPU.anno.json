@@ -1,0 +1,15 @@
+[
+  {
+    "class":"chisel3.stage.phases.DriverCompatibility$RunFirrtlCompilerAnnotation$"
+  },
+  {
+    "class":"firrtl.stage.RunFirrtlTransformAnnotation",
+    "transform":"firrtl.VerilogEmitter"
+  },
+  {
+    "class":"logger.LogLevelAnnotation",
+    "globalLogLevel":{
+      
+    }
+  }
+]

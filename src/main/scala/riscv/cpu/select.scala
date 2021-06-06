@@ -2,9 +2,12 @@ package riscv.cpu
 
 import chisel3._
 
+import riscv.define._
+
 class select extends Module{
   val io = IO(new Bundle{
     val select_ctrl = Input(UInt(8.W))
+    val pc = Input(UInt(32.W))
     val imm = Input(UInt(32.W))
     val instruction = Input(UInt(32.W))
     val data_read = Input(UInt(32.W))

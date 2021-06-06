@@ -5,9 +5,6 @@ circuit CPU :
     input reset : Reset
     output io : {flip pc_ctrl : UInt<8>, flip pc_imm : UInt<32>, pc : UInt<32>}
     
-    node _io_pc_T = add(io.pc_ctrl, io.pc_imm) @[pc.scala 12:23]
-    node _io_pc_T_1 = tail(_io_pc_T, 1) @[pc.scala 12:23]
-    io.pc <= _io_pc_T_1 @[pc.scala 12:9]
     
   module alu : 
     input clock : Clock
@@ -24,7 +21,7 @@ circuit CPU :
   module data : 
     input clock : Clock
     input reset : Reset
-    output io : {flip data_ctrl : UInt<8>, flip data_addr : UInt<5>, flip dataa_wwrite : UInt<32>, data_read : UInt<32>}
+    output io : {flip data_ctrl : UInt<8>, flip data_addr : UInt<5>, flip dataa_write : UInt<32>, data_read : UInt<32>}
     
     
   module imm_gen : 
@@ -36,7 +33,7 @@ circuit CPU :
   module instruction : 
     input clock : Clock
     input reset : Reset
-    output io : {flip pc : UInt<32>, Instruction : UInt<32>}
+    output io : {flip pc : UInt<32>, instruction : UInt<32>}
     
     
   module select : 
@@ -48,36 +45,36 @@ circuit CPU :
   module reg : 
     input clock : Clock
     input reset : Reset
-    output io : {flip reg_ctrl : UInt<8>, flip reg_read_addr_1 : UInt<5>, flip reg_read_addr_2 : UInt<5>, flip reg_write_data : UInt<32>, reg_read_data_1 : UInt<32>, reg_read_data_2 : UInt<32>}
+    output io : {flip reg_ctrl : UInt<8>, flip reg_read_addr_1 : UInt<5>, flip reg_read_addr_2 : UInt<5>, flip reg_write_data : UInt<32>, flip reg_write_addr : UInt<5>, reg_read_data_1 : UInt<32>, reg_read_data_2 : UInt<32>}
     
     
   module CPU : 
     input clock : Clock
     input reset : UInt<1>
-    output io : {flip a : UInt<32>, flip b : UInt<8>, c : UInt<32>}
+    output io : {}
     
-    inst pc of pc @[cpu.scala 15:18]
+    inst pc of pc @[cpu.scala 12:18]
     pc.clock <= clock
     pc.reset <= reset
-    inst alu of alu @[cpu.scala 16:19]
+    inst alu of alu @[cpu.scala 13:19]
     alu.clock <= clock
     alu.reset <= reset
-    inst ctrl of ctrl @[cpu.scala 17:20]
+    inst ctrl of ctrl @[cpu.scala 14:20]
     ctrl.clock <= clock
     ctrl.reset <= reset
-    inst data of data @[cpu.scala 18:20]
+    inst data of data @[cpu.scala 15:20]
     data.clock <= clock
     data.reset <= reset
-    inst imm_gen of imm_gen @[cpu.scala 19:23]
+    inst imm_gen of imm_gen @[cpu.scala 16:23]
     imm_gen.clock <= clock
     imm_gen.reset <= reset
-    inst instruction of instruction @[cpu.scala 20:27]
+    inst instruction of instruction @[cpu.scala 17:27]
     instruction.clock <= clock
     instruction.reset <= reset
-    inst select of select @[cpu.scala 21:22]
+    inst select of select @[cpu.scala 18:22]
     select.clock <= clock
     select.reset <= reset
-    inst reg of reg @[cpu.scala 22:19]
+    inst reg of reg @[cpu.scala 19:19]
     reg.clock <= clock
     reg.reset <= reset
     

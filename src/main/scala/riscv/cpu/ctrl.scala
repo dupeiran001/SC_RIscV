@@ -104,7 +104,7 @@ object ctrl extends Module{
       io.alu_ctrl := alu_def.addi
       io.data_ctrl := data_def.jalr
       io.imm_ctrl := imm_def.jalr
-      io.pc_ctrl := pc_def.add4
+      io.pc_ctrl := pc_def.jalr
       io.reg_ctrl := reg_def.jalr
       io.select_ctrl := select_def.jalr
     }

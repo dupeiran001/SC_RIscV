@@ -20,10 +20,10 @@ object imm_gen extends Module{
     }
     is(imm_def.branch){
       when(io.instruction(31) === 0.U){
-        io.imm := io.instruction(7)<<11.U + io.instruction(30,25)<<5.U + io.instruction(11,8)<<1.U
+        io.imm := (io.instruction(7)<<11.U) + (io.instruction(30,25)<<5.U) + (io.instruction(11,8)<<1.U)
       }
       .otherwise{
-        io.imm := io.instruction(7)<<11.U + io.instruction(30,25)<<5.U + io.instruction(11,8)<<1.U //+ "xFFFFFFFF".U<<12.U
+        io.imm := (io.instruction(7)<<11.U) + (io.instruction(30,25)<<5.U) + (io.instruction(11,8)<<1.U) + "xFFFFFFFF".U<<12.U
       }
     }
     is(imm_def.imm_5){
@@ -34,9 +34,9 @@ object imm_gen extends Module{
     }
     is(imm_def.jal){
       when(io.instruction(31) === 0.U){
-        io.imm := io.instruction(19,12)<<12.U + io.instruction(20)<<11.U + io.instruction(30,21)<<1.U
+        io.imm := (io.instruction(19,12)<<12.U) + (io.instruction(20)<<11.U) + (io.instruction(30,21)<<1.U)
       }.otherwise{
-        io.imm := io.instruction(19,12)<<12.U + io.instruction(20)<<11.U + io.instruction(30,21)<<1.U //+ "xFFFFFFFF".U<<12.U
+        io.imm := (io.instruction(19,12)<<12.U) + (io.instruction(20)<<11.U) + (io.instruction(30,21)<<1.U) + "xFFFFFFFF".U<<12.U
       }
     }
     is(imm_def.jalr){
@@ -44,7 +44,7 @@ object imm_gen extends Module{
         io.imm := io.instruction(31,20)
       }
       .otherwise{
-        io.imm := io.instruction(31,20) + "xFFFFFFFF".U<<11.U
+        io.imm := io.instruction(31,20) + ("xFFFFFFFF".U<<11.U)
       }
     }
     is(imm_def.load){
@@ -52,7 +52,7 @@ object imm_gen extends Module{
         io.imm := io.instruction(31,20)
       }
       .otherwise{
-        io.imm := io.instruction(31,20) + "xFFFFFFFF".U<<11.U
+        io.imm := io.instruction(31,20) + ("xFFFFFFFF".U<<11.U)
       }
     }
     is(imm_def.lui){
@@ -62,7 +62,7 @@ object imm_gen extends Module{
       io.imm := 0.U
     }
     is(imm_def.save){
-      io.imm := io.instruction(31,25)<<5.U + io.instruction(11,7)
+      io.imm := (io.instruction(31,25)<<5.U) + io.instruction(11,7)
     }
   }
 }

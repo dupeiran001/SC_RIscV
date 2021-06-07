@@ -9,9 +9,10 @@ let start_line+=1
 let end_line-=1
 line_num=`wc -l ./sim/code/main.elf | cut -f1 -d.`
 sed -i "${start_line},${end_line}d" ./src/main/scala/riscv/cpu/instruction.scala
+sed -i "${start_line}i ///////// auto fill start , will be auto filled by "make" //////////" ./src/main/scala/riscv/cpu/instruction.scala
 for i in `seq 1 ${line_num}`
 do
-  let line=${i}+${start_line}-1
+  let line=${i}+${start_line}
   let num=${i}-1
   sed -i "${line}i ins_mem{${num}}:="\"x`sed -n "${i}p" ./sim/code/main.elf`\".U"" ./src/main/scala/riscv/cpu/instruction.scala
 done

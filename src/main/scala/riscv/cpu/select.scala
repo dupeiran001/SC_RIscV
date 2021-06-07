@@ -61,14 +61,14 @@ object select extends Module{
     is(select_def.jal){
       io.alu_src_1 := io.pc
       io.alu_src_2 := io.imm
-      io.pc_imm := io.alu_out
-      io.data_write := io.pc + 4.U
+      io.pc_imm := io.alu_out + 4.U
+      io.reg_write_data := io.pc + 4.U
     }
     is(select_def.jalr){
       io.alu_src_1 := io.reg_read_data_1
       io.alu_src_2 := io.imm
-      io.pc_imm := io.alu_out + io.pc
-      io.data_write := io.pc + 4.U
+      io.pc_imm := io.alu_out + io.pc + 4.U
+      io.reg_write_data := io.pc + 4.U
     }
     is(select_def.load){
       io.alu_src_1 := io.reg_read_data_1

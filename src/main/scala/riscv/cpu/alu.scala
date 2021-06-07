@@ -5,7 +5,7 @@ import chisel3.util._
 
 import riscv.define._
 
-class alu extends Module{
+object alu extends Module{
   val io = IO(new Bundle{
     val alu_ctrl = Input(UInt(8.W))
     val alu_src_1 = Input(UInt(32.W))
@@ -56,7 +56,7 @@ class alu extends Module{
         io.alu_out := 0.U
       }
      }
-    }
+
     is(alu_def.eq){
       when(io.alu_src_1 === io.alu_src_2){
         io.alu_out := 1.U
@@ -85,18 +85,19 @@ class alu extends Module{
         io.alu_out := 0.U
       }
     }
-    is(alu_def.lt){
+    is(alu_def.ltu){
       when(io.alu_src_1 < io.alu_src_2){
         io.alu_out := 1.U
       }.otherwise{
         io.alu_out := 0.U
       }
     }
-    is(alu_def.ge){
+    is(alu_def.geu){
       when(io.alu_src_1 >= io.alu_src_2){
         io.alu_out := 1.U
       }.otherwise{
         io.alu_out := 0.U
       }
     }
+  }
 }

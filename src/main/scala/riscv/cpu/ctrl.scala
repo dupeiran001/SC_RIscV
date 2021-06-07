@@ -5,7 +5,7 @@ import chisel3.util._
 
 import riscv.define._
 
-class ctrl extends Module{
+object ctrl extends Module{
   val io = IO(new Bundle{
     val instruction = Input(UInt(32.W))
     val pc_ctrl = Output(UInt(8.W))
@@ -15,6 +15,13 @@ class ctrl extends Module{
     val reg_ctrl = Output(UInt(8.W))
     val alu_ctrl = Output(UInt(8.W))
   })
+
+  io.pc_ctrl := 0.U
+  io.imm_ctrl := 0.U
+  io.data_ctrl := 0.U
+  io.select_ctrl := 0.U
+  io.reg_ctrl := 0.U
+  io.alu_ctrl := 0.U
 
   switch(io.instruction(6,0)){
 
@@ -129,7 +136,7 @@ class ctrl extends Module{
       io.alu_ctrl := alu_def.addi
       io.data_ctrl := data_def.jal
       io.imm_ctrl := imm_def.jal
-      io.pc_ctrl := pc_def.add4
+      io.pc_ctrl := pc_def.jal
       io.reg_ctrl := reg_def.jal
       io.select_ctrl := select_def.jal
     }

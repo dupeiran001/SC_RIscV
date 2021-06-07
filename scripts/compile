@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "compiling......"
+riscv32-unknown-elf-as -c ./sim/code/main.asm -o ./sim/code/main.o
+echo "disassemblying......"
+riscv32-unknown-elf-objdump -d ./sim/code/main.o > ./sim/code/main.objd
+start_line=`grep -n "00000000" ./sim/code/main.objd | cut -f1 -d:`
+echo "cutting instruction code"
+let start_line+=1
+awk '{print $2}' ./sim/code/main.objd > ./sim/code/main.awk
+tail -n +${start_line} ./sim/code/main.awk > ./sim/code/main.tail 
+cp ./sim/code/main.tail ./sim/code/main.elf
+echo "generate code finished"

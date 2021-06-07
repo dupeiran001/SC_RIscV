@@ -7,4 +7,5 @@ object pc_def{
   val branch = "b00000001".U
   val jalr   = "b00000010".U
   val auipc  = "b00000011".U
+  val jal    = "b00000100".U
 }

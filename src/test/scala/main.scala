@@ -9,7 +9,16 @@ import chiseltest._
 import org.scalatest._
 
 import riscv._
+import riscv.cpu._
 
 object main extends App{
-  Driver.execute(args , ()=>new CPU())
+     Driver.execute(args ,()=> CPU) 
+  // Driver.execute(args , ()=> pc)
+  // Driver.execute(args , ()=> alu)
+  // Driver.execute(args , ()=> ctrl)
+  // Driver.execute(args , ()=> instruction)
+  // Driver.execute(args , ()=> select )
+  // Driver.execute(args , ()=> data )
+  // Driver.execute(args , ()=> reg )
+  // Driver.execute(args , ()=> imm_gen) 
 }

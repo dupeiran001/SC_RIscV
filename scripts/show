@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "initial with code:"
+echo "[asm]:"
+cat ./sim/code/main.asm
+echo "[hex]:"
+cat ./sim/code/main.elf

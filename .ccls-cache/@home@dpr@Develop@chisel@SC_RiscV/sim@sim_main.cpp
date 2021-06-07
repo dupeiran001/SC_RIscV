@@ -1,4 +1,5 @@
-#include "verilog/VCPU.h"
+/* verilator lint_off DECLFILENAME */
+#include "../obj_dir/VCPU.h"
 
 #include "include/verilated.h"
 

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "filling initial code......"
+echo "[from] ./sim/code/main.elf"
+echo "[ to ] ./src/main/scala/riscv/cpu/instruction.scala"
+start_line=`grep -n "fill script start" ./src/main/scala/riscv/cpu/instruction.scala | cut -f1 -d:`
+end_line=`grep -n "fill script end" ./src/main/scala/riscv/cpu/instruction.scala | cut -f1 -d:`
+let start_line+=1
+let end_line-=1
+line_num=`wc -l ./sim/code/main.elf | cut -f1 -d.`
+sed -i "${start_line},${end_line}d" ./src/main/scala/riscv/cpu/instruction.scala
+for i in `seq 1 ${line_num}`
+do
+  let line=${i}+${start_line}-1
+  let num=${i}-1
+  sed -i "${line}i ins_mem{${num}}:="\"x`sed -n "${i}p" ./sim/code/main.elf`\".U"" ./src/main/scala/riscv/cpu/instruction.scala
+done
+echo "initial code fill finished"

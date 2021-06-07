@@ -1,0 +1,9 @@
+
+./sim/code/main.o：     文件格式 elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <.text>:
+   0:	0ff06093          	ori	ra,zero,255
+   4:	fffff137          	lui	sp,0xfffff

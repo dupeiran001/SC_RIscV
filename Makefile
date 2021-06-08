@@ -10,7 +10,8 @@ all: fill generate
 	sbt "test:runMain main.main --target-dir generated/riscv"
 	./scripts/getVerilog
 	cp generated/riscv/CPU.v sim/verilog/CPU.v
-	cp generated/riscv/CPU.v ../../FPGA/project_1/project_1.srcs/sources_1/imports/riscv/CPU.v
+	# uncomment to copy the generated module to your own simulator 
+	#	cp generated/riscv/CPU.v ../../FPGA/project_1/project_1.srcs/sources_1/imports/riscv/CPU.v
 
 full: fill generate 
 	sbt "test:runMain main.main --target-dir generated/riscv --full-stacktrace"
@@ -27,8 +28,11 @@ sim: all verilate
 	${CXX} ${CXXFLAG} ${DEST} -o ${OUTPUT}
 
 generate:
-#	./scripts/compile
+	# uncomment the following , so that you can fill the main.elf to the instruction mem
+	# this will disable the compile progress from main.as to main.elf
+	# ./sim/code/main.*
+	./scripts/compile
 	./scripts/show
-	cp /home/dpr/Downloads/Test_37_Instr2.dat ./sim/code/main.elf
+#	cp /home/dpr/Downloads/Test_37_Instr2.dat ./sim/code/main.elf
 
 include sim/Makefile

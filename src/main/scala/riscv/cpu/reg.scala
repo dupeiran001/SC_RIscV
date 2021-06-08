@@ -24,7 +24,11 @@ object reg extends Module{
   io.reg_read_data_1 := reg(io.reg_read_addr_1 )
   io.reg_read_data_2 := reg(io.reg_read_addr_2 )
   reg(0) := 0.U
-
+  when(reset.toBool()){
+    for (i <- 1 to 31){
+      reg(i.U) := 0.U
+    }
+  }.otherwise{
   switch(io.reg_ctrl){
     is(reg_def.auipc){
       reg(io.reg_write_addr) := io.reg_write_data
@@ -70,5 +74,6 @@ object reg extends Module{
     io.reg_read_data_2 := 0.U
   }
   reg(0) := 0.U
+  }
 
 }

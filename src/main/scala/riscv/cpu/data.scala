@@ -22,8 +22,8 @@ object data extends Module{
     for(i <- 0 to 127){
       mem(i) := "x00000000".U
     }
-  }
-
+  }.otherwise{
+  
   switch(io.data_ctrl){
     is(data_def.auipc){
       io.data_read := 0.U
@@ -83,6 +83,7 @@ object data extends Module{
       io.data_read := 0.U
       mem(io.data_addr) := io.data_write
     }
+  }
   }
 }
 

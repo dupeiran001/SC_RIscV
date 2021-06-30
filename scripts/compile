@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo "compiling......"
-riscv32-unknown-elf-as -c ./sim/code/main.asm -o ./sim/code/main.o
+riscv32-unknown-linux-gnu-as -c ./sim/code/main.asm -o ./sim/code/main.o
 echo "disassemblying......"
-riscv32-unknown-elf-objdump -d ./sim/code/main.o > ./sim/code/main.objd
+riscv32-unknown-linux-gnu-objdump -d ./sim/code/main.o > ./sim/code/main.objd
 start_line=`grep -n "00000000" ./sim/code/main.objd | cut -f1 -d:`
 echo "cutting instruction code"
 let start_line+=1

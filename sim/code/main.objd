@@ -1,5 +1,5 @@
 
-./sim/code/main.o：     文件格式 elf32-littleriscv
+./sim/code/main.o:     file format elf32-littleriscv
 
 
 Disassembly of section .text:

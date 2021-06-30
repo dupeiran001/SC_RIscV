@@ -90,7 +90,7 @@ object CPU extends Module {
     reg_read_data_1 := mod_reg.io.reg_read_data_1
     reg_read_data_2 := mod_reg.io.reg_read_data_2
  
-  io.out := mod_instruction.io.instruction
+  io.out := instruction
 
 /*   pc := mod_pc.io.pc */
   // instruction := mod_instruction.io.instruction
